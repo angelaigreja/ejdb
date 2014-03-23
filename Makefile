@@ -28,6 +28,7 @@ init:
 node_webkit: i386 x86_64
 	mkdir -p ./tcejdb/static/
 	lipo -create ./libstcejdbx86.a ./libstcejdbx86_64.a -output ./tcejdb/static/libstcejdb.a
+	rm ./libstcejdbx86.a ./libstcejdbx86_64.a
 	ranlib ./tcejdb/static/libstcejdb.a
 
 i386:
