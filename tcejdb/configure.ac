@@ -251,6 +251,32 @@ then
   LD_LIBRARY_PATH="$LD_LIBRARY_PATH:$with_bzip/lib"
 fi
 
+
+# i386 mode
+AC_ARG_ENABLE(i386,
+  AC_HELP_STRING([--enable-i386], [build for i386]))
+if test "$enable_i386" = "yes"
+then
+  MYCFLAGS="$MYCFLAGS -arch i386"
+  MYCPPFLAGS="$MYCPPFLAGS -arch i386"
+  MYLDFLAGS="$MYLDFLAGS -arch i386"
+  MYARCH="x86"
+  enables="$enables (i386)"
+fi
+
+# x86_64 mode
+AC_ARG_ENABLE(x64,
+  AC_HELP_STRING([--enable-x64], [build for x86_64]))
+if test "$enable_x64" = "yes"
+then
+  MYCFLAGS="$MYCFLAGS -arch x86_64"
+  MYCPPFLAGS="$MYCPPFLAGS -arch x86_64"
+  MYLDFLAGS="$MYLDFLAGS -arch x86_64"
+  MYARCH="x86_64"
+  enables="$enables (x86_64)"
+fi
+
+
 #================================================================
 # Checking Commands and Libraries
 #================================================================
@@ -377,7 +403,6 @@ case $host_os in
 esac
 
 
-
 #================================================================
 # Generic Settings
 #================================================================
@@ -386,6 +411,7 @@ esac
 AC_SUBST(host)
 AC_SUBST(host_cpu)
 AC_SUBST(host_os)
+AC_SUBST(MYARCH)
 AC_SUBST(MYLIBVER)
 AC_SUBST(MYLIBREV)
 AC_SUBST(MYFORMATVER)

@@ -25,4 +25,24 @@ init:
 	- cp ./tcejdb/debian/changelog ./Changelog 
 	- cp ./tcejdb/debian/changelog ./tcejdb/Changelog
 
+node_webkit: i386 x86_64
+	mkdir -p ./tcejdb/static/
+	lipo -create ./libstcejdbx86.a ./libstcejdbx86_64.a -output ./tcejdb/static/libstcejdb.a
+	ranlib ./tcejdb/static/libstcejdb.a
+
+i386:
+	cd ./tcejdb && ./configure --enable-i386
+	$(MAKE) -C ./tcejdb version
+	$(MAKE) -C ./tcejdb libtcejdb.a
+	cp ./tcejdb/static/libstcejdbx86.a ./libstcejdbx86.a
+	$(MAKE) -C ./tcejdb clean
+
+x86_64:
+	cd ./tcejdb && ./configure --enable-x64
+	$(MAKE) -C ./tcejdb version
+	$(MAKE) -C ./tcejdb libtcejdb.a
+	cp ./tcejdb/static/libstcejdbx86_64.a ./libstcejdbx86_64.a
+	$(MAKE) -C ./tcejdb clean
+
+
 .PHONY: all clean deb-packages deb-source-packages init initdeb

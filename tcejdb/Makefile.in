@@ -12,6 +12,7 @@ SHELL = @SHELL@
 HOST_NAME = @host@
 HOST_CPU = @host_cpu@
 HOST_OS = @host_os@
+ARCH = @MYARCH@
 
 # Package information
 PACKAGE = @PACKAGE_NAME@
@@ -702,7 +703,7 @@ wordtable :
 libtcejdb.a : $(LIBOBJFILES)
 	$(AR) $(ARFLAGS) $@ $(LIBOBJFILES)
 	mkdir -p ./static
-	cp ./libtcejdb.a ./static/libstcejdb.a
+	cp ./libtcejdb.a ./static/libstcejdb$(ARCH).a
 
 
 libtcejdb.so.$(LIBVER).$(LIBREV).0 : $(LIBOBJFILES)
